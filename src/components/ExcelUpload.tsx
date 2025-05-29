@@ -20,12 +20,12 @@ const ExcelUpload = () => {
   };
 
   return (
-    <Card className="w-full bg-gradient-to-r from-ocean-500 to-ocean-600 border-0 text-white shadow-xl hover:shadow-2xl transition-shadow duration-300">
-      <CardContent className="p-12 text-center">
-        <div className="max-w-2xl mx-auto">
-          <Upload className={`h-20 w-20 mx-auto mb-6 ${isUploading ? 'animate-spin' : 'animate-bounce'}`} />
-          <h3 className="text-3xl font-bold mb-4">Upload de Planilhas</h3>
-          <p className="text-lg mb-8 opacity-90">
+    <Card className="bg-ocean-gradient border-0 text-white shadow-lg hover:shadow-xl transition-all duration-300">
+      <CardContent className="p-8">
+        <div className="flex flex-col items-center text-center">
+          <Upload className={`h-12 w-12 mb-4 ${isUploading ? 'animate-spin' : 'animate-bounce'}`} />
+          <h3 className="text-xl font-bold mb-3">Upload de Planilhas</h3>
+          <p className="text-sm opacity-90 mb-6">
             Faça o upload dos seus dados mensais em formato Excel (.xlsx) para análise automática
           </p>
           <input
@@ -36,12 +36,11 @@ const ExcelUpload = () => {
             className="hidden"
           />
           <Button 
-            size="lg" 
-            className="bg-white text-ocean-600 hover:bg-gray-50 font-semibold px-8 py-6 h-auto text-lg shadow-md hover:shadow-lg transition-all duration-300"
+            className="w-full bg-white hover:bg-gray-50 text-ocean-600 font-medium"
             onClick={handleFileSelect}
             disabled={isUploading}
           >
-            <Upload className="h-6 w-6 mr-3" />
+            <Upload className="h-4 w-4 mr-2" />
             {isUploading ? 'Processando...' : 'Selecionar Arquivo Excel'}
           </Button>
         </div>

@@ -41,18 +41,20 @@ const FilterPanel = () => {
           Filtros de Análise
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center">
+      <CardContent>
+        <div className="flex flex-col space-y-6">
+          {/* Período */}
+          <div>
+            <label className="text-sm font-medium text-gray-700 flex items-center mb-2">
               <Calendar className="h-4 w-4 mr-2 text-ocean-600" />
               Período
             </label>
             <DateRangePicker onDateChange={handleDateChange} />
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center">
+          {/* Categorias */}
+          <div>
+            <label className="text-sm font-medium text-gray-700 flex items-center mb-2">
               <Package className="h-4 w-4 mr-2 text-ocean-600" />
               Categorias
             </label>
@@ -67,7 +69,7 @@ const FilterPanel = () => {
                     : `${filters.selectedCategories.length} selecionada(s)`}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80">
+              <PopoverContent className="w-80" align="start">
                 <ScrollArea className="h-72 pr-4">
                   <div className="space-y-2">
                     {!isLoading && filterOptions.categories.map((category) => (
@@ -91,16 +93,17 @@ const FilterPanel = () => {
             </Popover>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center">
+          {/* Garçom */}
+          <div>
+            <label className="text-sm font-medium text-gray-700 flex items-center mb-2">
               <Users className="h-4 w-4 mr-2 text-ocean-600" />
               Garçom
             </label>
             <Select value={filters.selectedWaiter} onValueChange={handleWaiterChange}>
               <SelectTrigger className="bg-white border-ocean-200">
-                <SelectValue />
+                <SelectValue placeholder="Selecione um garçom" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent align="start">
                 <ScrollArea className="h-72">
                   <SelectItem value="todos">Todos</SelectItem>
                   {!isLoading && filterOptions.waiters.map((waiter) => (
@@ -113,16 +116,17 @@ const FilterPanel = () => {
             </Select>
           </div>
 
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-gray-700 flex items-center">
+          {/* Ponto de Venda */}
+          <div>
+            <label className="text-sm font-medium text-gray-700 flex items-center mb-2">
               <Store className="h-4 w-4 mr-2 text-ocean-600" />
               Ponto de Venda
             </label>
             <Select value={filters.selectedPdv} onValueChange={handlePdvChange}>
               <SelectTrigger className="bg-white border-ocean-200">
-                <SelectValue />
+                <SelectValue placeholder="Selecione um PDV" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent align="start">
                 <ScrollArea className="h-72">
                   <SelectItem value="todos">Todos</SelectItem>
                   {!isLoading && filterOptions.pdvs.map((pdv) => (
