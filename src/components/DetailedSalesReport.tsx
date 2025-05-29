@@ -158,6 +158,36 @@ const DetailedSalesReport = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Conteúdo expandido */}
+                {expandedCategory === category.nome && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="border-t border-gray-100"
+                  >
+                    <div className="p-4 bg-white/50">
+                      <div className="space-y-3">
+                        {category.items?.map((item: any) => (
+                          <div key={item.nome} className="flex justify-between items-center py-2 px-4 rounded-lg hover:bg-white/80">
+                            <div>
+                              <p className="font-medium text-gray-900">{item.nome}</p>
+                              <p className="text-sm text-gray-600">{item.quantidade} unidades vendidas</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-medium text-gray-900">
+                                R$ {item.valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                              </p>
+                              <p className="text-sm text-gray-600">{item.vendas} vendas</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             ))}
           </motion.div>

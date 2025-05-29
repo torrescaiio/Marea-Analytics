@@ -288,19 +288,35 @@ export const useDetailedReports = (reportType: ReportType): ReportData => {
                   valorTotal: 0,
                   quantidade: 0,
                   totalItens: 0,
-                  itens: new Set()
+                  items: {}
                 };
               }
               acc[category].valorTotal += Number(sale.valor_total || 0);
               acc[category].quantidade += Number(sale.quantidade || 0);
-              acc[category].itens.add(sale.nome_item);
+
+              // Agrupar itens dentro da categoria
+              const itemKey = sale.nome_item;
+              if (!acc[category].items[itemKey]) {
+                acc[category].items[itemKey] = {
+                  nome: itemKey,
+                  quantidade: 0,
+                  valorTotal: 0,
+                  vendas: 0
+                };
+              }
+              acc[category].items[itemKey].quantidade += Number(sale.quantidade || 0);
+              acc[category].items[itemKey].valorTotal += Number(sale.valor_total || 0);
+              acc[category].items[itemKey].vendas += 1;
+
               return acc;
             }, {});
 
-            // Converter Set de itens para contagem
+            // Processar os dados finais
             Object.values(categoryGroups).forEach((category: any) => {
-              category.totalItens = category.itens.size;
-              delete category.itens;
+              // Converter o objeto de itens em array e ordenar por valor total
+              category.items = Object.values(category.items)
+                .sort((a: any, b: any) => b.valorTotal - a.valorTotal);
+              category.totalItens = category.items.length;
             });
 
             result = Object.values(categoryGroups).sort((a: any, b: any) => b.valorTotal - a.valorTotal);
