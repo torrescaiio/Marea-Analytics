@@ -9,9 +9,16 @@ import ExcelUpload from "@/components/ExcelUpload";
 import AdvancedFilters from "@/components/AdvancedFilters";
 import { Button } from "@/components/ui/button";
 import { useFilters } from "@/contexts/FilterContext";
+import { useIsMobile } from "@/hooks/use-mobile";
+import MobileLayout from "@/components/MobileLayout";
 
 const Index = () => {
   const { clearFilters } = useFilters();
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <MobileLayout />;
+  }
 
   return (
     <TooltipProvider>
@@ -19,66 +26,36 @@ const Index = () => {
         <Header />
         
         {/* Main Content */}
-        <section className="container mx-auto px-6 py-8">
-          {/* Hero Section */}
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Bem-vindo ao Dashboard do 
-              <span className="bg-ocean-gradient bg-clip-text text-transparent"> Marea</span>
-            </h2>
-            <p className="text-lg text-sand-700 max-w-2xl mx-auto">
-              Análise completa das vendas do seu restaurante. 
-              Insights em tempo real para decisões estratégicas.
-            </p>
-          </div>
-
-          {/* Excel Upload - Full Width */}
-          <div className="mb-8">
-            <ExcelUpload />
-          </div>
-
-          {/* Filters and Actions Section */}
-          <div className="flex flex-col lg:flex-row gap-6">
-            {/* Filters Panel - Left Side */}
-            <div className="flex-1">
+        <main className="container mx-auto p-6">
+          <div className="grid gap-6 grid-cols-1 lg:grid-cols-[300px_1fr]">
+            {/* Sidebar */}
+            <aside className="space-y-6">
               <FilterPanel />
-            </div>
+              <ExcelUpload />
+            </aside>
 
-            {/* Actions Panel - Right Side */}
-            <div className="w-full lg:w-64">
-              <div className="flex flex-col gap-3">
-                <div className="text-sm font-medium text-gray-700">
-                  Ações
-                </div>
+            {/* Main Area */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
                 <AdvancedFilters />
-                <Button 
-                  variant="outline" 
-                  size="default"
-                  className="w-full border-ocean-200"
+                <Button
+                  variant="ghost"
                   onClick={clearFilters}
+                  className="text-sand-600 hover:text-sand-900"
                 >
                   Limpar Filtros
                 </Button>
               </div>
+
+              <StatsCards />
+              <div className="grid gap-6 grid-cols-1 xl:grid-cols-2">
+                <SalesChart />
+                <TopItems />
+              </div>
+              <WaiterPerformance />
             </div>
           </div>
-
-          {/* Stats Cards */}
-          <div className="mt-8">
-            <StatsCards />
-          </div>
-
-          {/* Charts Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
-            <SalesChart />
-            <TopItems />
-          </div>
-
-          {/* Waiter Performance */}
-          <div className="mt-8">
-            <WaiterPerformance />
-          </div>
-        </section>
+        </main>
 
         {/* Footer */}
         <footer className="bg-white/80 backdrop-blur-md border-t border-ocean-200 mt-16">

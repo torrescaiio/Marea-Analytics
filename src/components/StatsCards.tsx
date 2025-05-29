@@ -1,8 +1,11 @@
 import { StatsCard } from "@/components/StatsCard";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const StatsCards = () => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className={`grid gap-4 ${isMobile ? 'grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-4'}`}>
       <StatsCard
         title="Vendas Totais"
         type="currency"
