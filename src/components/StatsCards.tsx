@@ -5,7 +5,7 @@ const StatsCards = () => {
   const isMobile = useIsMobile();
 
   return (
-    <div className={`grid gap-4 ${isMobile ? 'grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-4'}`}>
+    <div className="grid grid-cols-4 gap-4">
       <StatsCard
         title="Vendas Totais"
         type="currency"

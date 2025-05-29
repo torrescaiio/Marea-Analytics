@@ -7,6 +7,7 @@ import WaiterPerformance from "@/components/WaiterPerformance";
 import FilterPanel from "@/components/FilterPanel";
 import ExcelUpload from "@/components/ExcelUpload";
 import AdvancedFilters from "@/components/AdvancedFilters";
+import CategorySalesChart from "@/components/CategorySalesChart";
 import { Button } from "@/components/ui/button";
 import { useFilters } from "@/contexts/FilterContext";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -27,31 +28,40 @@ const Index = () => {
         
         {/* Main Content */}
         <main className="container mx-auto p-6">
-          <div className="grid gap-6 grid-cols-1 lg:grid-cols-[300px_1fr]">
-            {/* Sidebar */}
-            <aside className="space-y-6">
+          <div className="flex justify-between gap-6">
+            {/* Left Column - Filters and Upload */}
+            <div className="w-[300px] space-y-6">
               <FilterPanel />
               <ExcelUpload />
-            </aside>
+            </div>
 
-            {/* Main Area */}
-            <div className="space-y-6">
+            {/* Right Column - Main Content */}
+            <div className="flex-1 space-y-6">
+              {/* Advanced Filters and Clear Button */}
               <div className="flex items-center justify-between">
-                <AdvancedFilters />
-                <Button
+                <Button 
                   variant="ghost"
                   onClick={clearFilters}
                   className="text-sand-600 hover:text-sand-900"
                 >
                   Limpar Filtros
                 </Button>
+                <AdvancedFilters />
               </div>
 
+              {/* Stats Cards */}
               <StatsCards />
-              <div className="grid gap-6 grid-cols-1 xl:grid-cols-2">
+
+              {/* Charts Row */}
+              <div className="grid grid-cols-2 gap-6">
                 <SalesChart />
                 <TopItems />
               </div>
+
+              {/* Category Sales Chart */}
+              <CategorySalesChart />
+
+              {/* Waiter Performance */}
               <WaiterPerformance />
             </div>
           </div>
@@ -61,7 +71,7 @@ const Index = () => {
         <footer className="bg-white/80 backdrop-blur-md border-t border-ocean-200 mt-16">
           <div className="container mx-auto px-6 py-4">
             <p className="text-center text-sm text-gray-600">
-              © 2024 Marea Restaurante. Todos os direitos reservados.
+              © 2025 Marea Restaurante. Todos os direitos reservados.
             </p>
           </div>
         </footer>

@@ -1,73 +1,120 @@
-# Welcome to your Lovable project
+# Marea Analytics - Documentação Completa
 
-## Project info
+## 1. Repositório GitHub
+- **URL**: https://github.com/torrescaiio/Marea-Analytics.git
+- **Branch Principal**: master
+- **Estrutura**: React/Vite application
 
-**URL**: https://lovable.dev/projects/48c1810a-a469-44e3-a7bc-f940ad6439e8
+## 2. Netlify
+### Configurações de Build
+- Build command: `npm install && npm run build`
+- Publish directory: `dist`
+- Base directory: "/"
+- Functions directory: "netlify/functions"
+- Node Version: 18
 
-## How can I edit this code?
+### Configuração do netlify.toml
+```toml
+[build]
+command = "npm run build"
+publish = "dist"
+environment = { NODE_VERSION = "18", VITE_SHOULD_USE_HASH = "true" }
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/48c1810a-a469-44e3-a7bc-f940ad6439e8) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
 ```
 
-**Edit a file directly in GitHub**
+## 3. Supabase
+### Tabela Principal: `SalesData`
+#### Colunas Principais:
+- `data_fiscal`: Data da venda
+- `nome_pdv`: Nome do ponto de venda
+- `atendente`: Nome do garçom/atendente
+- `grupo`: Categoria do produto
+- `grupo_fixo`: Categoria fixa do produto
+- `nome_item`: Nome do item vendido
+- `quantidade`: Quantidade vendida
+- `valor_total`: Valor total da venda
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 4. Funcionalidades Implementadas
 
-**Use GitHub Codespaces**
+### Layout Responsivo
+- MobileLayout para dispositivos móveis
+- Layout desktop otimizado
+- Menu deslizante para filtros em mobile
+- StatsCards em 2 colunas para mobile
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Relatórios
+- Por Item (Ranking de Vendas)
+- Por Categoria (com itens expandíveis)
+- Crescimento de Itens (vs. Mês Anterior)
+- Desempenho de Garçom (vs. Mês Anterior)
 
-## What technologies are used for this project?
+### Filtros
+- Período (DateRange)
+- PDV
+- Garçom/Atendente
+- Categorias
 
-This project is built with:
+## 5. SEO e Metadados
+- **Título**: Marea Analytics
+- **Idioma**: pt-BR
+- **Descrição**: Sistema de análise de vendas para restaurantes
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 6. Estrutura de Arquivos Principais
+```
+src/
+├── components/
+│   ├── DetailedSalesReport.tsx
+│   ├── FilterPanel.tsx
+│   ├── ExcelUpload.tsx
+│   └── MobileLayout.tsx
+├── hooks/
+│   ├── useDetailedReports.ts
+│   └── useFilterOptions.ts
+├── contexts/
+│   └── FilterContext.tsx
+└── integrations/
+    └── supabase/
+        └── client.ts
+```
 
-## How can I deploy this project?
+## 7. Dependências Principais
+```json
+{
+  "dependencies": {
+    "@tanstack/react-query": "latest",
+    "@supabase/supabase-js": "latest",
+    "framer-motion": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest",
+    "vite": "latest"
+  }
+}
+```
 
-Simply open [Lovable](https://lovable.dev/projects/48c1810a-a469-44e3-a7bc-f940ad6439e8) and click on Share -> Publish.
+## 8. Fluxo de Dados
+1. Os dados são carregados do Supabase através do hook `useDetailedReports`
+2. Os filtros são gerenciados globalmente através do `FilterContext`
+3. Os relatórios são atualizados automaticamente quando os filtros mudam
+4. Os dados são processados e agrupados de acordo com o tipo de relatório selecionado
+5. A interface atualiza em tempo real com os novos dados
 
-## Can I connect a custom domain to my Lovable project?
+## 9. Otimizações
+- Implementado cache de 30 segundos para queries
+- Lazy loading para componentes pesados
+- Otimização de imagens e assets
+- Animações suaves com Framer Motion
 
-Yes, you can!
+## 10. Segurança
+- Todas as chamadas à API são feitas através do cliente Supabase
+- Variáveis de ambiente configuradas corretamente
+- Redirecionamentos seguros configurados no Netlify
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+> Este documento contém todas as informações necessárias para entender a estrutura e configuração do projeto Marea Analytics. Para iniciar um novo desenvolvimento ou dar continuidade ao projeto, utilize estas informações como referência principal.

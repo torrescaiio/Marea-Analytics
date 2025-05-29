@@ -1,12 +1,13 @@
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Settings } from "lucide-react";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import StatsCards from "@/components/StatsCards";
 import TopItems from "@/components/TopItems";
 import WaiterPerformance from "@/components/WaiterPerformance";
 import FilterPanel from "@/components/FilterPanel";
+import { Link } from "react-router-dom";
 
 const MobileLayout = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,6 +32,15 @@ const MobileLayout = () => {
             </Sheet>
             <h1 className="text-xl font-semibold text-gray-900">Marea Analytics</h1>
           </div>
+          <Link to="/settings">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-600 hover:text-ocean-600 hover:bg-ocean-50"
+            >
+              <Settings className="h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
 

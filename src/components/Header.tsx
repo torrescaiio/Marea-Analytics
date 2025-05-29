@@ -1,9 +1,10 @@
-import { Waves, Upload } from "lucide-react";
+import { Waves, Upload, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { useExcelUpload } from "@/hooks/useExcelUpload";
 import { ResetDataDialog } from "@/components/ResetDataDialog";
 import { BackupManager } from "@/components/BackupManager";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { uploadExcel, isUploading } = useExcelUpload();
@@ -26,10 +27,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
-              <div className="relative">
-                <Waves className="h-8 w-8 text-ocean-600 animate-pulse" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-tropical-400 rounded-full animate-ping"></div>
-              </div>
+              <Waves className="h-8 w-8 text-ocean-600" />
               <div>
                 <h1 className="text-2xl font-bold bg-ocean-gradient bg-clip-text text-transparent">
                   Marea Restaurante
@@ -58,6 +56,15 @@ const Header = () => {
               <Upload className="h-4 w-4 mr-2" />
               {isUploading ? 'Processando...' : 'Upload Excel'}
             </Button>
+            <Link to="/settings">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-gray-600 hover:text-ocean-600 hover:bg-ocean-50"
+              >
+                <Settings className="h-5 w-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
